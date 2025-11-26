@@ -7,7 +7,7 @@ function applyColorToSVG(svgContent, color) {
   const dom = new JSDOM(svgContent, { contentType: "image/svg+xml" });
   const document = dom.window.document;
   const paths = document.querySelectorAll("path");
-  paths.forEach(path => {
+  paths.forEach((path) => {
     path.setAttribute("fill", color);
   });
   return document.documentElement.outerHTML;
@@ -38,8 +38,9 @@ export async function downloadFontAwesomeIcons(
   );
   const browser = await puppeteer.launch({
     headless: false,
-    args: ["--window-size=1200,800"],
+    protocolTimeout: 60000, // 60 seconds
     defaultViewport: null,
+    args: ["--start-maximized"],
   });
   const page = await browser.newPage();
   const client = await page.target().createCDPSession();
