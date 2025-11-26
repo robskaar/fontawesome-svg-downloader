@@ -1,7 +1,8 @@
 # FontAwesome SVG Downloader
+This repo exists purely because i had to gather the icons we used to be explaned by documentations team in our help guide files, instead of manually going through the site and downloading 100svgs, i made this package so i could easily do it.
 
-Download FontAwesome SVG icons (Pro or Free) via Puppeteer, with login support.  
-Supports saving to disk or returning SVGs as strings, with optional color customization.
+You can download FontAwesome SVG icons (Pro or Free) via Puppeteer, with login support that is required for downloading the pro icons as svgs.  
+Supports saving to disk or returning SVGs as strings, with optional color customization, defaults to black.
 
 ## Features
 
