@@ -1,15 +1,16 @@
 import puppeteer from "puppeteer";
 import fs from "fs-extra";
 import path from "path";
+import { JSDOM } from "jsdom";
 
 function applyColorToSVG(svgContent, color) {
-  // Replace all fill attributes
-  let replaced = svgContent;
-  replaced = replaced.replace(/fill="#[0-9a-fA-F]{3,8}"/g, `fill="${color}"`);
-  replaced = replaced.replace(/fill="currentColor"/g, `fill="${color}"`);
-  // Add fill if missing in <path>
-  replaced = replaced.replace(/<path((?!fill=)[^>]*)(\/?)>/g, `<path$1 fill="${color}"$2>`);
-  return replaced;
+  const dom = new JSDOM(svgContent, { contentType: "image/svg+xml" });
+  const document = dom.window.document;
+  const paths = document.querySelectorAll("path");
+  paths.forEach(path => {
+    path.setAttribute("fill", color);
+  });
+  return document.documentElement.outerHTML;
 }
 
 /**
